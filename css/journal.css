@@ -1,37 +1,149 @@
 
-h2{
+/* ------------------------------
+   JOURNAL PAGE
+------------------------------ */
+
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap');
+
+:root {
+  --background: #101014;
+  --surface: #19191f;
+  --surface-hover: #22222a;
+  --text: #f2f2f5;
+  --muted: #a0a0ae;
+  --accent: #b5f36b;
+  --border: #303039;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  background: var(--background);
+  color: var(--text);
+  font-family: 'DM Sans', sans-serif;
+  line-height: 1.7;
+  margin: 0;
+  padding: 40px 0;
+}
+
+/* ------------------------------
+   HEADINGS
+------------------------------ */
+
+h2 {
   text-align: center;
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  letter-spacing: -1.5px;
+  margin: 20px 0 10px;
 }
-h3{
+
+h3 {
   text-align: center;
+  color: var(--accent);
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin-bottom: 50px;
 }
 
-main{
-background:#FAEBF8;
-padding:10px;
-display:flex;
-flex-wrap:wrap;
-width:90vw;
-margin:0 auto;
+/* ------------------------------
+   JOURNAL CONTAINER
+------------------------------ */
+
+main {
+  background: transparent;
+  padding: 10px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 22px;
+  width: 90vw;
+  max-width: 1200px;
+  margin: 0 auto;
 }
 
-section{
-background-color:#CF4EC2;
-width:40vw;
-margin-top:10px;
-margin-left:2vw;
-overflow:hidden;
-}
-section h4{
-margin-top:5px;
-color:#F0C7EC;
-text-align:center;
-font-family: Arial, Helvetica, sans-serif;
+/* ------------------------------
+   JOURNAL ENTRIES
+------------------------------ */
 
+section {
+  background-color: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  width: calc(50% - 15px);
+  margin: 0;
+  overflow: hidden;
+  transition: transform 0.25s ease,
+              background-color 0.25s ease,
+              border-color 0.25s ease;
 }
-section article{
-background-color:#DC7FD3;
-color:white;
-padding:10px;
-font-family: Arial, Helvetica, sans-serif;
+
+section:hover {
+  background-color: var(--surface-hover);
+  border-color: var(--accent);
+  transform: translateY(-5px);
+}
+
+section h4 {
+  margin: 0;
+  padding: 22px 20px;
+  color: var(--accent);
+  text-align: center;
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 1.2rem;
+  letter-spacing: -0.3px;
+  border-bottom: 1px solid var(--border);
+}
+
+section article {
+  background-color: transparent;
+  color: var(--muted);
+  padding: 25px;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.95rem;
+}
+
+/* ------------------------------
+   LINKS
+------------------------------ */
+
+a {
+  color: var(--accent);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+a:hover {
+  color: #d0ff9c;
+}
+
+/* ------------------------------
+   RESPONSIVE DESIGN
+------------------------------ */
+
+@media (max-width: 700px) {
+  body {
+    padding: 20px 0;
+  }
+
+  main {
+    width: 94vw;
+    padding: 5px;
+  }
+
+  section {
+    width: 100%;
+  }
+
+  h2 {
+    font-size: 2.2rem;
+  }
+
+  h3 {
+    margin-bottom: 30px;
+  }
 }
