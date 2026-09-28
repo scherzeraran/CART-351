@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Exercise 1 | CART 351 — Aran Scherzer</title>
+<style>
+  :root {
+    --bg: #0d0f12;
+    --panel: #14171c;
+    --text: #e6e6e6;
+    --muted: #8a8f98;
+    --accent: #7dd3fc;
+    --ok: #86efac;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    padding: 2rem 1.25rem 4rem;
+  }
+  .wrap { max-width: 900px; margin: 0 auto; }
+  a.back {
+    color: var(--muted);
+    text-decoration: none;
+    font-size: 0.9rem;
+  }
+  a.back:hover { color: var(--accent); }
+  h1 {
+    font-size: 1.6rem;
+    margin: 1rem 0 0.25rem;
+  }
+  p.sub { color: var(--muted); margin-top: 0; margin-bottom: 1.5rem; }
+  .panel {
+    background: var(--panel);
+    border: 1px solid #22262d;
+    border-radius: 10px;
+    overflow: hidden;
+    margin-bottom: 1.5rem;
+  }
+  .panel-header {
+    padding: 0.6rem 1rem;
+    font-size: 0.8rem;
+    color: var(--muted);
+    border-bottom: 1px solid #22262d;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  pre {
+    margin: 0;
+    padding: 1rem;
+    overflow-x: auto;
+    font-family: "SF Mono", Menlo, Consolas, monospace;
+    font-size: 0.85rem;
+    line-height: 1.5;
+  }
+  #code { color: #c9d1d9; max-height: 420px; overflow-y: auto; }
+  #output { color: var(--ok); min-height: 2.5rem; white-space: pre-wrap; }
+  #status { color: var(--muted); font-style: italic; }
+  button {
+    background: var(--accent);
+    color: #05202b;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 6px;
+    font-weight: 600;
+    cursor: pointer;
+    font-size: 0.85rem;
+  }
+  button:disabled { opacity: 0.5; cursor: default; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <a class="back" href="../index.html">← Back to home</a>
+  <h1>Exercise 1: Python Fundamentals</h1>
+  <p class="sub">CART 351 — runs live in your browser via Pyodide (a real Python interpreter compiled to WebAssembly).</p>
+
+  <div class="panel">
+    <div class="panel-header">
+      <span>exercise1.py</span>
+      <button id="runBtn" disabled>Loading Python…</button>
+    </div>
+    <pre id="code"></pre>
+  </div>
+
+  <div class="panel">
+    <div class="panel-header"><span>Output</span></div>
+    <pre id="output"><span id="status">Waiting to run…</span></pre>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/pyodide/v0.26.4/full/pyodide.js"></script>
+<script>
+const pythonCode = `
+print("------")
+print("Task 1: Arithmetic expressions")
+print("Expected output: 7")
+print((10 + 4) // 2)
+
+print("\\n------")
+print("Task 2: Expressions of inequality")
+print("Expected output: True")
+print(14 < 15)
+
+print("\\n------")
+print("Task 3: Variable assignment")
+print("Expected output: 54")
+a_num_variable = 54
+print(a_num_variable)
+
+print("\\n------")
+print("Task 4: Types")
+print("Expected output: <class 'str'>")
+x = 14
+y = 17.4
+z = "today is a fine day for sailing!"
+print(type(z))
+
+print("\\n------")
+print("Task 5: Questions about strings")
+print("Expected output: 51")
+first_line = "It was the best of times."
+second_line = "It was the worst of times."
+print(len(first_line) + len(second_line))
+
+print("\\n------")
+print("Task 6: Questions about strings, part 2")
+print("Expected output: 25")
+aStringSentence = "Did the cat jump out the window yesterday?"
+print(aStringSentence.find("window"))
+
+print("\\n------")
+print("Task 7: String transformations")
+print("Expected output: someone who has spent too much time")
+partLy = "     someone who has spent too much time    \\n"
+print(partLy.strip())
+
+print("\\n------")
+print("Task 8: String transformations, part 2")
+print("Expected output: SOMEONE WHO HAS SPENT TOO MUCH TIME")
+print(partLy.strip().upper())
+
+print("\\n------")
+print("Task 9: String indexing")
+print("Expected output: p")
+offset = 1
+print("apple"[offset])
+
+print("\\n------")
+print("Task 10: String slices")
+print("Expected output: jump")
+start = 12
+end = 16
+aStringSentenceAgain = "Did the cat jump out the window yesterday?"
+print(aStringSentenceAgain[start:end])
+
+print("\\n------")
+print("Task 11: Integers and strings")
+print("Expected output: 100")
+print(int("19") + int("81"))
+
+print("\\n------")
+print("Task 12: Conditions")
+print("Expected output: test_var is less than 200")
+test_var = 90
+if test_var > 200:
+    print("test_var is greater than 200!")
+if test_var < 200:
+    print("test_var is less than 200")
+
+print("\\n------")
+print("Task 13: Conditions II")
+print("Expected output: the condition test passed")
+test_var_three = 400
+test_var_two = 800
+if test_var_three > 200 and test_var_two > 400:
+    print("the condition test passed")
+else:
+    print("the condition test not passed")
+`;
+
+document.getElementById('code').textContent = pythonCode.trim();
+
+const runBtn = document.getElementById('runBtn');
+const outputEl = document.getElementById('output');
+
+async function main() {
+  const pyodide = await loadPyodide();
+  runBtn.disabled = false;
+  runBtn.textContent = "▶ Run";
+
+  runBtn.onclick = async () => {
+    runBtn.disabled = true;
+    runBtn.textContent = "Running…";
+    outputEl.textContent = "";
+    try {
+      pyodide.setStdout({ batched: (text) => { outputEl.textContent += text + "\n"; } });
+      await pyodide.runPythonAsync(pythonCode);
+    } catch (err) {
+      outputEl.textContent += "\nError: " + err;
+    }
+    runBtn.disabled = false;
+    runBtn.textContent = "▶ Run again";
+  };
+
+  runBtn.click();
+}
+
+main();
+</script>
+</body>
+</html>
