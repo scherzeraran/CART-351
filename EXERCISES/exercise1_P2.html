@@ -6,7 +6,7 @@
   <title>Exercise 01 – Python | Aran Scherzer | CART 351</title>
   <link rel="stylesheet" type="text/css" href="../css/main.css">
   <style>
-    /* Only what main.css doesn't already cover */
+   
     .py-actions { display: flex; gap: .75rem; align-items: center; margin: 1.25rem 0; flex-wrap: wrap; }
     .py-actions button, .py-actions .button { font: inherit; cursor: pointer; }
     .py-actions button:disabled { opacity: .5; cursor: wait; }
@@ -37,11 +37,6 @@
     <div class="hero-content">
       <p class="eyebrow">CART 351 • EXERCISE 01</p>
       <h1>Python,<br><span>running live.</span></h1>
-
-      <p class="intro">
-        These scripts run right in your browser (Python via Pyodide).
-        The first run takes a few seconds while Python loads.
-      </p>
 
       <a href="../index.html" class="button">← Back home</a>
     </div>
@@ -100,11 +95,11 @@ async function loadSource(file, el) {
   return text;
 }
 
-// Show source code on load
+
 loadSource(FILE_A, document.getElementById("srcA")).catch(() => {});
 loadSource(FILE_B, document.getElementById("srcB")).catch(() => {});
 
-// ---------- Part A: plain print() output ----------
+
 document.getElementById("runA").addEventListener("click", async (e) => {
   const btn = e.target, out = document.getElementById("outA"), status = document.getElementById("statusA");
   btn.disabled = true; out.textContent = "";
@@ -124,7 +119,7 @@ document.getElementById("runA").addEventListener("click", async (e) => {
   btn.disabled = false;
 });
 
-// ---------- Part B: requests + rich ----------
+
 const RICH_SETUP = `
 import io, contextlib
 import rich.console as _rc
@@ -171,4 +166,7 @@ pyodide_http.patch_all()   # makes requests work in the browser
 });
 </script>
 </body>
+</footer> 
+  AI (Claude) was used to help stylize and function this page, not the actual work though.
+</footer> 
 </html>
