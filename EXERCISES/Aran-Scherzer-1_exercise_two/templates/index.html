@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h3>Nasa Image Archive</h3>
+<section>
+    <p>Search NASA's public image library. Use <a href="{{ url_for('t1') }}">T1</a> to see the top result with its
+        description,
+        or <a href="{{ url_for('t2') }}">T2</a> to see a gallery of everything it finds.</p>
+</section>
+{% endblock %}

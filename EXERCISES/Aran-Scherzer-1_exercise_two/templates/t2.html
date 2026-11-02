@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+{% block content %}
+<!-- page heading -->
+<section class="page-heading">
+    <h3>Image Gallery</h3>
+    <p>Search the NASA archive and browse every image it finds.</p>
+</section>
+<section class="search-box">
+    <!-- GET request: the text is sent to the server as ?search_term=... -->
+    <form action="{{ url_for('getSearchCriteria_adv') }}" method="GET">
+        <label for="search_term">NASA API SEARCH CRITERIA:</label>
+        <div class="search-fields">
+            <input type="text" id="search_term" name="search_term" placeholder="search for ..." required>
+            <input type="submit" value="submit search">
+        </div>
+    </form>
+</section>
+
+<!-- dynamic list of images: 0, 1, 2, ... n -->
+{% if images %}
+<section class="result-gallery">
+    {% for singleImage in images %}
+    <img src="{{ singleImage }}" alt="NASA image result" loading="lazy">
+    {% endfor %}
+</section>
+{% endif %}
+{% endblock %}
