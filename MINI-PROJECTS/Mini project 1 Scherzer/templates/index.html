@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Please Don’t Lie</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;600&family=Archivo+Black&family=Courier+Prime&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+  <main>
+    <header>
+      <h1>Please Don’t Lie</h1>
+      <p class="sub">Form 351-L, Department of Plausible Persons. Our model needs your details to understand people like
+        you. Answer truthfully, dishonest or improbable entries are detected and cleansed.</p>
+    </header>
+
+    <section class="paper" aria-labelledby="f">
+      <h2 id="f">Intake</h2>
+      <form id="intake" autocomplete="off">
+        <label class="field">Full name<input name="name" required maxlength="80"></label>
+        <label class="field">Occupation<input name="occupation" required maxlength="80"></label>
+        <label class="field">City of residence<input name="city" required maxlength="80"></label>
+        <label class="field">Age<input name="age" type="number" min="0" max="120" required></label>
+        <label class="field">Hours slept last night<input name="sleep" type="number" min="0" max="24" step="0.5"
+            required></label>
+        <div class="field">
+          <div class="mood-head"><label for="mood">Mood, 1 to 10</label><output id="moodOut" for="mood">5</output></div>
+          <input id="mood" name="mood" type="range" min="1" max="10" value="5">
+        </div>
+        <label class="field wide">One true thing about you<input name="statement" maxlength="140"
+            placeholder="(truthful statements only please)"></label>
+        <p id="error" class="error" role="alert"></p>
+        <button type="submit">Submit</button>
+      </form>
+    </section>
+
+    <section id="receipt" class="paper" hidden aria-live="polite">
+      <div class="stamp" id="stamp"></div>
+      <h2>Your file</h2>
+      <p>Classified as <strong id="label"></strong> (<span id="conf"></span>% confidence).</p>
+      <p>Dirt score <strong id="dirt"></strong> / 100. <span id="verdict"></span></p>
+      <p id="note"></p>
+    </section>
+
+    <section class="paper">
+      <h2>The Average Person</h2>
+      <p class="sub" id="summary">Loading the file cabinet…</p>
+      <canvas id="field" aria-label="Scatter of every submission by age and hours slept"></canvas>
+      <p class="legend">
+        <span><span class="dot ok"></span>accepted</span>
+        <span><span class="dot bad"></span>cleansed</span>
+        <span><span class="dot ring"></span>you</span>
+        <span><span class="plus">+</span>average of accepted entries</span>
+        <span>bigger dot = better mood</span>
+      </p>
+      <div class="stats" id="stats"></div>
+      <div class="charts">
+        <div>
+          <h3>Occupations (accepted entries)</h3>
+          <div id="occBars"></div>
+        </div>
+        <div>
+          <h3>Cities (accepted entries)</h3>
+          <div id="cityBars"></div>
+        </div>
+        <div>
+          <h3>Mood, 1 to 10 (accepted entries)</h3>
+          <div id="moodBars"></div>
+        </div>
+      </div>
+      <h3>On file, but cleansed</h3>
+      <ul id="discard"></ul>
+      <h3>Recent statements</h3>
+      <ul id="statements"></ul>
+    </section>
+    <section class="paper about">
+      <h2>About this form</h2>
+      <p>A dataset is the result of how it was collected (Mimi Onuoha). This form asks for the truth, then scores people
+        by how far they sit from its idea of normal, and cleanses the ones it finds improbable (Hito Steyerl). The
+        Average Person is built only from entries the machine approved. Nobody is that person.</p>
+    </section>
+  </main>
+  <script src="{{ url_for('static', filename='main.js') }}"></script>
+</body>
+
+</html>

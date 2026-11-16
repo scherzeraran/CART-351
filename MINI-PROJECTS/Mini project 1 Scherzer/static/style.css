@@ -1,0 +1,44 @@
+/* Palette: fluorescent-lit wall, form paper, carbon-copy blue ink, rejection-stamp red */
+:root{--wall:#D5E0D6;--paper:#F2F5EF;--ink:#26359B;--print:#2A2E2B;--rule:#7D8B80;--stamp:#B8232F}
+*{box-sizing:border-box}
+body{margin:0;background:var(--wall);color:var(--print);font:16px/1.5 "Archivo",system-ui,sans-serif}
+main{max-width:960px;margin:0 auto;padding:2.5rem 1rem 4rem;display:grid;gap:1.5rem}
+h1{font:400 clamp(2.6rem,9vw,6rem)/.9 "Archivo Black","Archivo",sans-serif;letter-spacing:-.04em;color:var(--ink);margin:0}
+h2{font:600 1.25rem "Archivo",sans-serif;margin:0 0 1rem}
+h3{font:600 1rem "Archivo",sans-serif;margin:1.5rem 0 .5rem}
+.sub{max-width:62ch;margin:1rem 0 0}
+.paper{background:var(--paper);border:2px solid var(--print);padding:1.5rem;position:relative}
+form{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:.75rem}
+.field{border:1px solid var(--rule);padding:.4rem .6rem;font-size:.8rem;display:block}
+.field.wide,.error,button{grid-column:1/-1}
+input{display:block;width:100%;border:0;background:transparent;font:1.05rem "Courier Prime",monospace;color:var(--ink);padding:.2rem 0;outline:0}
+.field:focus-within{outline:3px solid var(--ink);outline-offset:1px}
+input[type=range]{padding:0}
+button{font:600 1.1rem "Archivo",sans-serif;background:var(--ink);color:var(--paper);border:0;padding:.9rem;cursor:pointer}
+button:hover{background:var(--print)} button:focus-visible{outline:3px solid var(--stamp);outline-offset:2px}
+.error{color:var(--stamp);margin:0;min-height:1.5em}
+.stamp{position:absolute;top:1rem;right:1rem;border:4px solid var(--stamp);color:var(--stamp);font:400 1.3rem "Archivo Black",sans-serif;padding:.2rem .7rem;transform:rotate(-7deg);animation:thud .3s ease-out}
+@keyframes thud{from{transform:rotate(-7deg) scale(2.2);opacity:0}}
+canvas{width:100%;height:360px;display:block;border:1px solid var(--rule);margin-top:1rem}
+.legend{font-size:.85rem;display:flex;gap:1.2rem;flex-wrap:wrap;align-items:center}
+.legend .dot{display:inline-block;width:.8rem;height:.8rem;border-radius:50%;margin-right:.3rem;vertical-align:-1px}
+.ok{background:var(--ink)}.bad{background:var(--stamp)}.ring{border:2px solid var(--print)}
+ul{padding-left:1.2rem;margin:0;font-family:"Courier Prime",monospace}
+
+@media (prefers-reduced-motion:reduce){.stamp{animation:none}}
+
+.mood-head{display:flex;justify-content:space-between;align-items:center;gap:2rem;margin-bottom:.4rem}
+output{font:1.9rem "Courier Prime",monospace;color:var(--ink);background:#fff;border:2px solid var(--ink);min-width:3.6rem;text-align:center;padding:.1rem .7rem}
+.plus{font:700 1.2rem/1 "Archivo",sans-serif;margin-right:.3rem}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:.75rem;margin:1rem 0}
+.stat{border:1px solid var(--rule);padding:.5rem .8rem}
+.stat span{display:block;font-size:.8rem;color:var(--rule)}
+.stat strong{font:400 1.8rem "Courier Prime",monospace;color:var(--ink)}
+.charts{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.5rem}
+.bar{display:grid;grid-template-columns:7.5rem 1fr 2rem;gap:.6rem;align-items:center;font-size:.9rem;margin:.3rem 0}
+.bar b{font-weight:400;text-transform:capitalize;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.bar i{display:block;height:1rem;background:var(--ink)}
+.bar em{font:normal .95rem "Courier Prime",monospace;text-align:right}
+.why{text-decoration:none;color:var(--stamp);font-size:.85rem}
+.struck{text-decoration:line-through;text-decoration-color:var(--stamp)}
+.about p{max-width:62ch;margin:0}
