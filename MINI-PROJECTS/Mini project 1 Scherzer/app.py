@@ -10,7 +10,7 @@ Mimi Onuoha, "The Point of Collection" (datasets are the result of their means o
      - Mimi Onuoha, "The Point of Collection", Data & Society: Points (2016)
      - CART 351 Fall 2026, "Flask III & Fetch" lecture notes (sessions, fetch GET/POST, JSON responses)
      - Flask documentation: https://flask.palletsprojects.com/
-     - AI assistance: Claude (Anthropic) helped double check this code. It was scaffolded, revised, and edited by the author.
+     - AI assistance: Claude helped double check this code. It was scaffolded, revised, and edited by the author.
 
 Run:  pip install -r requirements.txt  &&  python app.py   ->  http://127.0.0.1:5000
 """
@@ -21,12 +21,12 @@ from statistics import mean, pstdev
 from flask import Flask, jsonify, render_template, request, session
 
 app = Flask(__name__)
-# Signs the session cookie (Flask III lecture). Sessions hold only temporary, non-sensitive data: entry ids.
+# Signs the session cookie (Flask III lecture). Sessions hold only temporary, non-sensitive data entry ids.
 app.secret_key = 'CHANGE_ME_BAD_SECRET_KEY'
 DATA_FILE = os.path.join(os.path.dirname(os.path.abspath(__file__)), "data", "submissions.json")
 LOCK = threading.Lock()  # one writer at a time so the JSON file never gets corrupted
 
-# The machine's idea of a probable person. Anything outside is cleansed (flagged as dirty data).
+# The machine's idea of a probable person. Anything outside is cleansed.
 NUMERIC = {"age": (18, 85, 35, 15), "sleep": (4, 10, 7, 2), "mood": (1, 10, 6, 3)}
 ADJ = ["Probable", "Latent", "Compliant", "Frequent", "Seasonal", "Unverified"]
 NOUN = ["Consumer", "Claimant", "Commuter", "Sleeper", "Taxpayer", "Visitor"]
@@ -42,7 +42,7 @@ def load_rows():
 
 
 def save_rows(rows):
-    tmp = DATA_FILE + ".tmp"  # write to a temp file, then swap: no half-written JSON
+    tmp = DATA_FILE + ".tmp"  # write to a temp file, then swap: no half written JSON
     with open(tmp, "w", encoding="utf-8") as f:
         json.dump(rows, f, indent=2, ensure_ascii=False)
     os.replace(tmp, DATA_FILE)
@@ -96,7 +96,7 @@ def composite(rows):
     tally = lambda k: Counter(r[k].lower() for r in ok).most_common(8)
     return {"age": avg("age"), "sleep": avg("sleep"), "mood": avg("mood"),
             "occupations": tally("occupation"), "cities": tally("city"), "n": len(ok),
-            # mood histogram 1-10 (accepted only): the model never contains a 1 or a 10, they are always cleansed
+            # mood histogram 1-10 (accepted only), the model never contains a 1 or a 10, they're always cleansed
             "moods": [[str(m), sum(1 for r in ok if r["mood"] == m)] for m in range(1, 11)]}
 
 
@@ -106,7 +106,7 @@ def index():
     return render_template("index.html")
 
 
-@app.post("/api/submit")  # FETCH #1: front end -> server (saved permanently to JSON)
+@app.post("/api/submit")  # FETCH #1: front end to server (saved permanently to JSON)
 def submit():
     p = request.get_json(silent=True) or {}
     try:
@@ -125,18 +125,18 @@ def submit():
         accepted = [r for r in rows if r["status"] == "accepted"]
         e["id"], e["time"] = uuid.uuid4().hex[:10], int(time.time())
         e["dirt"] = dirt_score(e, accepted)
-        # Steyerl's "dirty data": improbable people are cleansed from the model... but we keep them.
+        # Steyerl's "dirty data" improbable people are cleansed from the model, but are still kept.
         e["reasons"] = cleanse_reasons(e)
         e["status"] = "cleansed" if e["reasons"] else "accepted"
         e["label"], e["confidence"] = classify(e["id"])
         rows.append(e)
         save_rows(rows)
-    session["mine"] = session.get("mine", [])[-20:] + [e["id"]]  # remember THIS visitor's entries (client-side cookie)
+    session["mine"] = session.get("mine", [])[-20:] + [e["id"]]  # remember this visitor's entries (client-side cookie)
     return jsonify(id=e["id"], dirt=e["dirt"], status=e["status"], label=e["label"],
                    confidence=e["confidence"], verdict=verdict(e["dirt"]), reasons=e["reasons"])
 
 
-@app.get("/api/data")  # FETCH #2: server JSON -> front end (collective representation)
+@app.get("/api/data")  # FETCH #2: server JSON to front end 
 def data():
     rows = load_rows()
     return jsonify(
