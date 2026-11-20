@@ -1,1 +1,20 @@
+# CART 351: Peer Feedback
 
+
+Nat Nina 
+
+### Concept & Implementation
+A journaling machine where the user writes out a journal entry. While they write, the system quietly tracks how they write: where they hesitate, which words they delete or rewrite, and so on. When the entry is finished, it reveals everything it picked up and offers an interpretation of the writer's character based on those behaviours. I found it interesiting as a concept and it's pontential uses for future purposes, and I also thought the design was pretty suiting. The presentation was well done and showed a lot of the project's inner-workings and core idea. Some suggestions: Let users replay their writing session as an animation, so they can watch their own pauses and deletions. Compare entries over time to show how someone's writing habits change with mood or date. 
+
+
+
+### Concept & Implementation
+An interactive app where passing clouds drift across the screen and users type in what shape they think each cloud resembles. The most popular answers are then displayed around the clouds, so the shared interpretations become part of the visual. [Add anything you remember about how answers were stored or ranked. Cloud-gazing is something nearly everyone has done, so the interaction needed no explanation which is nice. Showing the most popular answers turns individual imagination into a shared experience, and it makes the viewer curious about what others saw. 
+Some suggestions: Let users draw or outline the shape they see, not just type it. Keep an archive of past clouds and their answers so the piece grows over time.
+
+
+
+Marc-Antoine Pilliot & ...
+
+### Concept & Implementation
+A navigable 3D world in which the user can walk up to a wall and upload pictures. Each picture appears on the sides of a cube, and the cubes are arranged in a row of five on the wall. The project also attempted to implement a filter so that only cat photos would be accepted. Turning uploads into physical objects. Putting images on cubes in a walkable space makes a gallery of user content feel spatial and tangible. A playful constraint. Limiting uploads to cat photos adds humour and a clear theme, and it raises an interesting question about who decides what belongs in a shared space. The idea is fun, but image classification is not perfectly reliable, so some non-cats could slip through or real cats could be rejected. Making it clear to the user what happens when a photo is rejected would help. Some suggestions: Allow the cubes to be rotated, rearranged, or clicked for a close-up of each image. Add multiple walls or rooms, each with a different allowed subject. Show playful feedback when a non-cat image is rejected, so the filter becomes part of the experience.
